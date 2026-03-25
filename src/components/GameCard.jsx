@@ -5,13 +5,15 @@ export default function GameCard({ juego }) {
                              "text-[#ff6b6b] border-[#ff6b6b]";
 
   return (
-    <div key={juego.id} className='relative bg-[#050508] border border-[#ffd7004b]  hover:scale-102 transition-transform duration-200'>
+    <div key={juego.id} className='relative bg-[#050508] border border-[#ffd7004b]  hover:scale-102 hover:border-primary transition-transform duration-200'>
         <div className="relative w-full">
              <img src={juego.background_image} alt={juego.name} className='w-full h-48 object-cover' />
              <div className='absolute bottom-0 bg-linear-to-t from-[#050508] to-transparent w-full h-[50%]'/>
         </div>
 
-        <p className={`absolute top-2 right-2 px-2 py-1 bg-[#050508] font-pixel text-[0.7rem] leading-relaxed border ${metacriticColor}`}>{juego.metacritic}</p>
+        {juego.metacritic && (
+            <p className={`absolute top-2 right-2 px-2 py-1 bg-[#050508] font-pixel text-[0.7rem] leading-relaxed border ${metacriticColor}`}>{juego.metacritic}</p>
+        )}
 
         <div className='p-3 flex flex-col gap-3'>
             <h2 className='font-pixel text-[0.7rem] leading-relaxed text-primary'>{juego.name}</h2>
