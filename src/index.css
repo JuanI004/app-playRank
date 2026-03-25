@@ -1,5 +1,7 @@
 @import "tailwindcss";
-
+*{
+  scrollbar-color: #ffd700 #00000000;
+}
 @theme {
   --color-primary: #ffd700;
   --color-secondary: #aaaaaa;
@@ -25,4 +27,8 @@ html {
 94%{text-shadow:3px 3px 0 #000, 0 0 20px #ffd70088}
 97%{text-shadow:3px 0 #ff006688, -3px 0 #00ffff88, 3px 3px 0 #000}
 98%{text-shadow:3px 3px 0 #000, 0 0 20px #ffd70088}
+}
+@keyframes blink {
+0%,100%{opacity:1}
+50%{opacity:0}
 }

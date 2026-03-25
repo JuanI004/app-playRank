@@ -6,3 +6,10 @@
   pointer-events: none;
   z-index: 5;
 }
+.caracteristica {
+  box-shadow: 4px 4px 0 #aa88005b;
+}
+.caracteristica:hover {
+  box-shadow: 4px 4px 0 #aa8800;
+  border-color: #ffd700;
+}
