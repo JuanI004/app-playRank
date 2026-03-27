@@ -1,5 +1,6 @@
 import useTopGames from './hooks/useTopGames'
 import GameCard from './components/GameCard';
+import { Link } from 'react-router';
 import './App.css'
 
 const CARACTERISTICAS = [ 
@@ -28,12 +29,12 @@ function App() {
                   animation:"glitch 6s infinite"
           }}>Rate.<br/>Rank.<br/>Play.</h1>
           <p className='max-w-lg text-center font-inter text-secondary'>Rateá tus juegos favoritos, armá tu Top 5, descubrí qué jugar y encontrá los mejores precios.</p>
-          <div className='flex gap-6'>
-            <button className='py-4 px-8 bg-primary text-[#050508] text-xs font-pixel uppercase hover:bg-[#ffc400] hover:scale-105 transition-transform duration-200 cursor-pointer'
-            style={{boxShadow:"4px 4px 0 #aa8800"}}>Empezar</button>
+          <Link to="/juegos">
             <button className='py-4 px-8 border-2 border-primary text-primary text-xs font-pixel uppercase hover:bg-[#ffc400] cursor-pointer hover:text-[#050508] hover:scale-105 transition-transform duration-200'
-            style={{boxShadow:"4px 4px 0 #aa8800"}}>Ver juegos</button>
-          </div>
+            style={{boxShadow:"4px 4px 0 #aa8800"}}>
+              Ver juegos
+            </button>
+          </Link>
           <p className='font-pixel text-xs text-secondary mt-6' style={{animation: "blink 1s infinite step-end"}}>▼ SCROLL ▼</p>
           <div className='absolute bottom-0 bg-linear-to-t from-[#050508] to-transparent w-full h-[20%]'/>
         </main>
@@ -74,8 +75,10 @@ function App() {
           <p className='font-inter text-md w-md text-center text-secondary mt-2'>
             Miles de gamers ya están rankeando sus juegos favoritos. Falta tu opinión
           </p>
-          <button className='py-4 px-8 bg-primary text-[#050508] text-xs font-pixel uppercase cursor-pointer hover:bg-[#ffc400] hover:scale-105 transition-transform duration-200 cursor-pointer'
-            style={{boxShadow:"4px 4px 0 #aa8800"}}>Play Now</button>
+          <Link to="/juegos">
+            <button className='py-4 px-8 bg-primary text-[#050508] text-xs font-pixel uppercase cursor-pointer hover:bg-[#ffc400] hover:scale-105 transition-transform duration-200 cursor-pointer'
+              style={{boxShadow:"4px 4px 0 #aa8800"}}>Play Now</button>
+          </Link>
         </div>
       </section>  
     </>

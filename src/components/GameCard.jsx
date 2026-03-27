@@ -1,11 +1,15 @@
+import { useNavigate } from "react-router";
+
 export default function GameCard({ juego }) {
   const metacriticColor =
     juego.metacritic >= 90 ? "text-[#00ff88] border-[#00ff88]" :
     juego.metacritic >= 75 ? "text-[#ffd700] border-[#ffd700]" :
                              "text-[#ff6b6b] border-[#ff6b6b]";
 
+  const navigate = useNavigate();
+
   return (
-    <div key={juego.id} className='relative bg-[#050508] border border-[#ffd7004b]  hover:scale-102 hover:border-primary transition-transform duration-200'>
+    <div key={juego.id} onClick={() => navigate(`/juegos/${juego.id}`)} className='relative bg-[#050508] border border-[#ffd7004b]  hover:scale-102 hover:border-primary transition-transform duration-200'>
         <div className="relative w-full">
              <img src={juego.background_image} alt={juego.name} className='w-full h-48 object-cover' />
              <div className='absolute bottom-0 bg-linear-to-t from-[#050508] to-transparent w-full h-[50%]'/>
