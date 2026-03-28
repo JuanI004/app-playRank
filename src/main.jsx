@@ -10,6 +10,7 @@ import Footer from './components/Footer.jsx'
 import Juegos from './pages/Juegos.jsx'
 import Gamepage from './pages/GamePage.jsx'
 import Precios from './pages/Precios.jsx'
+import Playlist from './pages/Playlist.jsx'
 
 const queryClient = new QueryClient()
 const router = createBrowserRouter([
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path:"/precios/:nombreJuego",
     element:<Precios />
+  },
+  {
+    path: "/playlist",
+    element: <Playlist/>
   }
 ])
 

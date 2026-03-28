@@ -3,6 +3,7 @@ import useFetchInfoJuego from "../hooks/useFetchInfoJuego"
 import InfoSection from "../components/InfoSection"
 import usePlaylist from "../hooks/usePlaylist"
 import useTop5 from "../hooks/useTop5"
+import useRatings from "../hooks/useRatings"
 import { useState } from "react" 
 import { useNavigate } from "react-router"
 
@@ -12,9 +13,10 @@ export default function GamePage() {
 
   const { toggleInPlaylist, isInPlaylist } = usePlaylist()
   const { toggleInTop5, isInTop5 } = useTop5()
-
+  const { AddRating, getRating } = useRatings()
+  const ratingJuego = getRating(id);
   const { juego, screenshots, isLoading, error } = useFetchInfoJuego({ idJuego: id })
-  const [estrellasHover, setEstrellasHover] = useState({cant: 0, fixed: false})
+  const [estrellasHover, setEstrellasHover] = useState({cant: ratingJuego, fixed: false})
   const [imagenSelect, setImagenSelect] = useState(null)
 
   const esDePC = juego.data?.platforms?.some(p => p.platform.name.toLowerCase().includes("pc") || p.platform.name.toLowerCase().includes("steam"))
@@ -25,7 +27,8 @@ export default function GamePage() {
                              "text-[#ff6b6b] border-[#ff6b6b]";
 
   function handleSubmitRating(cant) {
-    setEstrellasHover({cant, fixed: true})
+    setEstrellasHover({cant})
+    AddRating(id, cant)
   }
 
   function handleAddPlaylist() {
@@ -153,12 +156,14 @@ export default function GamePage() {
 
             <section className="px-6 py-10 flex flex-col gap-4 bg-[#0a0a14] border border-[#3f361a]">
               <h3 className="font-pixel text-primary text-xs">MI RATING</h3>
-              <div className="flex gap-0.5 items-center">
+              <div className="flex gap-0.5 items-center"
+                onMouseLeave={() => !estrellasHover.fixed && setEstrellasHover({cant: ratingJuego, fixed: false})}
+              >
                     {[1, 2, 3, 4, 5].map((s) => (
                      <span
                         key={s}
                         onMouseEnter={() => !estrellasHover.fixed && setEstrellasHover({cant: s, fixed: false})}
-                        onMouseLeave={() => !estrellasHover.fixed && setEstrellasHover({cant: 0, fixed: false})}
+                        
                         onClick={() => handleSubmitRating(s)}
 
                         className="text-[2rem] cursor-default"
@@ -166,7 +171,7 @@ export default function GamePage() {
                     >★</span>
                     ))} 
                     <span className="font-inter mx-4 text-sm text-secondary">
-                      {estrellasHover.fixed ? `Tu rating: ${estrellasHover.cant} estrellas` : "Haz click para calificar"}
+                      {estrellasHover.fixed || ratingJuego > 0 ? `Tu rating: ${estrellasHover.cant} estrellas` : "Haz click para calificar"}
                     </span>
                 </div>
             </section>
