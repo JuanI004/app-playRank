@@ -1,12 +1,18 @@
 import { useParams } from "react-router"
 import useFetchInfoJuego from "../hooks/useFetchInfoJuego"
 import InfoSection from "../components/InfoSection"
+import usePlaylist from "../hooks/usePlaylist"
+import useTop5 from "../hooks/useTop5"
 import { useState } from "react" 
 import { useNavigate } from "react-router"
 
 export default function GamePage() {
   const { id } = useParams()
   const navigate = useNavigate()
+
+  const { toggleInPlaylist, isInPlaylist } = usePlaylist()
+  const { toggleInTop5, isInTop5 } = useTop5()
+
   const { juego, screenshots, isLoading, error } = useFetchInfoJuego({ idJuego: id })
   const [estrellasHover, setEstrellasHover] = useState({cant: 0, fixed: false})
   const [imagenSelect, setImagenSelect] = useState(null)
@@ -23,11 +29,11 @@ export default function GamePage() {
   }
 
   function handleAddPlaylist() {
-    // Lógica para agregar el juego a la playlist del usuario
+    toggleInPlaylist(juego.data)
   }
 
   function handleAddTop5() {
-    // Lógica para agregar el juego al top 5 del usuario
+    toggleInTop5(juego.data)
   }
 
   if (isLoading) {
@@ -170,13 +176,13 @@ export default function GamePage() {
               style={{boxShadow:"4px 4px 0 #aa8800"}}
               onClick={handleAddPlaylist}
             >
-              + PLAYLIST
+              {isInPlaylist(juego.data?.id) ? "EN PLAYLIST" : "+ PLAYLIST"}
             </button>
             <button className='py-4 px-8 border-2 border-primary text-primary text-xs font-pixel uppercase hover:bg-[#ffc400] cursor-pointer hover:text-bg  duration-200'
               style={{boxShadow:"4px 4px 0 #aa8800"}}
               onClick={handleAddTop5}
             >
-              + TOP 5
+              {isInTop5(juego.data?.id) ? "EN TOP 5" : "+ TOP 5"}
             </button>
             </div>        
 
@@ -204,7 +210,7 @@ export default function GamePage() {
                 </button>
               </section>
             )}
-            
+
           </div>
 
         </div>
