@@ -7,8 +7,8 @@ export default function useTopGames () {
         const today = new Date().toISOString().split('T')[0];
         const params = new URLSearchParams({
           key: import.meta.env.VITE_RAWG_API_KEY,
-          metacritic: '95,100',
-          dates: `2015-01-01,${today}`,
+          metacritic: '90,100',
+          dates: `2018-01-01,${today}`,
           page_size: '6',
           ordering: "-metacritic",
         });
