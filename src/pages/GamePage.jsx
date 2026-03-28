@@ -11,6 +11,8 @@ export default function GamePage() {
   const [estrellasHover, setEstrellasHover] = useState({cant: 0, fixed: false})
   const [imagenSelect, setImagenSelect] = useState(null)
 
+  const esDePC = juego.data?.platforms?.some(p => p.platform.name.toLowerCase().includes("pc") || p.platform.name.toLowerCase().includes("steam"))
+
   const metacriticColor =
     juego.data?.metacritic >= 90 ? "text-[#00ff88] border-[#00ff88]" :
     juego.data?.metacritic >= 75 ? "text-[#ffd700] border-[#ffd700]" :
@@ -189,17 +191,20 @@ export default function GamePage() {
                 <p className="font-pixel text-secondary text-xs">{juego.data?.achievements_count}</p>
               </div>
             </section>        
-
-            <section className="px-6 py-10 flex flex-col gap-4 bg-[#0a0a14] border border-[#3f361a]">
-              <h3 className="font-pixel text-primary text-xs">ENCUENTRA EL MEJOR PRECIO</h3>
-              <p className="font-inter text-secondary text-sm">Compara precios en diferentes tiendas y encuentra la mejor oferta para comprar este juego.</p>
-              <button className='py-4 px-8 border-2 bg-primary text-bg text-xs font-pixel uppercase hover:bg-[#ffc400] cursor-pointer hover:text-bg  duration-200'
-              style={{boxShadow:"4px 4px 0 #aa8800"}}
-              onClick={() => navigate(`/precios/${encodeURIComponent(juego.data?.name)}`)}
-              >
-                VER PRECIOS
-              </button>
-            </section>
+            
+            {esDePC && (
+              <section className="px-6 py-10 flex flex-col gap-4 bg-[#0a0a14] border border-[#3f361a]">
+                <h3 className="font-pixel text-primary text-xs">ENCUENTRA EL MEJOR PRECIO</h3>
+                <p className="font-inter text-secondary text-sm">Compara precios en diferentes tiendas y encuentra la mejor oferta para comprar este juego.</p>
+                <button className='py-4 px-8 border-2 bg-primary text-bg text-xs font-pixel uppercase hover:bg-[#ffc400] cursor-pointer hover:text-bg  duration-200'
+                  style={{boxShadow:"4px 4px 0 #aa8800"}}
+                  onClick={() => navigate(`/precios/${encodeURIComponent(juego.data?.name)}`)}
+                >
+                 VER PRECIOS
+                </button>
+              </section>
+            )}
+            
           </div>
 
         </div>
