@@ -7,6 +7,7 @@ export default function Top5Card({
   onRemove,
   onMoveUp,
   onMoveDown,
+  onClick,
   isFirst,
   isLast,
 }) {
@@ -34,7 +35,7 @@ export default function Top5Card({
   return (
     <div
       key={juego?.id}
-      className={`group relative bg-bg border border-[#2b2b2b] ${!juego && "border-dashed hover:border-[#ffd70056] hover:bg-[#ffd90009]"}  hover:scale-102 transition-transform duration-200 flex gap-3`}
+      className={`group relative bg-bg border border-[#2b2b2b] ${!juego && "border-dashed hover:border-[#ffd70056] hover:bg-[#ffd90009]"}  hover:scale-102 transition-transform duration-200 flex flex-col sm:flex-row gap-3`}
       style={{
         background: juego
           ? index + 1 <= 3
@@ -46,8 +47,9 @@ export default function Top5Card({
             ? "3px 3px 0 rgba(255,215,0,0.15)"
             : "3px 3px 0 transparent",
       }}
+      onClick={!juego && onClick}
     >
-      <div className="flex p-4 py-6 justify-center items-center gap-4">
+      <div className="flex  p-4 py-6 justify-center items-center gap-4">
         <h1 className={`text-[2.5rem] font-pixel ${rating}`}>#{index + 1}</h1>
 
         {juego?.background_image ? (
