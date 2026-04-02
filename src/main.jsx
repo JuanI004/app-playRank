@@ -12,6 +12,7 @@ import Gamepage from "./pages/GamePage.jsx";
 import Precios from "./pages/Precios.jsx";
 import Playlist from "./pages/Playlist.jsx";
 import Top5 from "./pages/Top5.jsx";
+import Mood from "./pages/Mood.jsx";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
   {
     path: "/top-5",
     element: <Top5 />,
+  },
+  {
+    path: "/recomendacion",
+    element: <Mood />,
   },
 ]);
 
