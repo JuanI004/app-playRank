@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import validator from "validator";
+import bcrypt from "bcrypt";
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -21,6 +22,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "Por favor ingresa tu contraseña"],
     minlength: [8, "La contraseña debe tener al menos 8 caracteres"],
+    select: false,
   },
   passwordConfirm: {
     type: String,
@@ -34,7 +36,13 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.pre("save", function (next) {});
+userSchema.pre("save", async function () {
+  if (!this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 14);
+    this.passwordConfirm = undefined;
+  }
+
+});
 
 const User = mongoose.model("User", userSchema);
 

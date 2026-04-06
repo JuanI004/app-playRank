@@ -23,11 +23,13 @@ build/
 *.njsproj
 *.sln
 *.sw?
+config.env
 .env.local
 .env
 .env.development
 .env.production
 Thumbs.db
+*.yaml
 
 # Coverage
 coverage/
