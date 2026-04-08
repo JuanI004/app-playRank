@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const isLoggedIn = false;
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { logout, user } = useAuth();
+  console.log(user);
 
   return (
     <div className="fixed top-0 left-0 right-0  flex flex-col bg-[#060509d7] border-b border-[#ffd90079] z-30 ">
@@ -25,24 +28,67 @@ export default function Header() {
                 Explorar
               </a>
             </li>
-            {isLoggedIn ? (
+            {user ? (
               <>
-                <li>
-                  <a
-                    href="/playlist"
-                    className="text-secondary hover:text-primary uppercase"
+                <li
+                  onClick={() => setDropdownOpen((prev) => !prev)}
+                  className="relative flex items-center cursor-pointer gap-2 text-secondary hover:text-primary uppercase"
+                >
+                  <p>Mi Perfil</p>
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 16 16"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className={
+                      dropdownOpen
+                        ? "rotate-180 transition-all duration-75"
+                        : ""
+                    }
                   >
-                    PlayList
-                  </a>
+                    <path
+                      d="M4 6L8 10L12 6"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
                 </li>
-                <li>
-                  <a
-                    href="/top-5"
-                    className="text-secondary hover:text-primary uppercase"
-                  >
-                    Top 5
-                  </a>
-                </li>
+                {dropdownOpen && (
+                  <menu className="absolute bg-[#060509d7] mt-10 right-3 border border-[#ffd90079] z-30 py-5 flex flex-col gap-4 px-5">
+                    <li>
+                      <p className="text-primary hover:text-primary uppercase">
+                        {user?.data.name}
+                      </p>
+                    </li>
+                    <li>
+                      <a
+                        href="/top-5"
+                        className="text-secondary hover:text-primary uppercase"
+                      >
+                        Top 5
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        href="/playlist"
+                        className="text-secondary hover:text-primary uppercase"
+                      >
+                        Playlist
+                      </a>
+                    </li>
+                    <li>
+                      <button
+                        onClick={logout}
+                        className="text-secondary hover:text-primary uppercase "
+                      >
+                        Cerrar Sesion
+                      </button>
+                    </li>
+                  </menu>
+                )}
               </>
             ) : (
               <>
@@ -87,22 +133,77 @@ export default function Header() {
               Explorar
             </a>
           </li>
-          <li>
-            <a
-              href="/playlist"
-              className="text-secondary hover:text-primary uppercase"
-            >
-              PlayList
-            </a>
-          </li>
-          <li>
-            <a
-              href="/top-5"
-              className="text-secondary hover:text-primary uppercase"
-            >
-              Top 5
-            </a>
-          </li>
+          {user ? (
+            <>
+              {" "}
+              <li
+                onClick={() => setDropdownOpen((prev) => !prev)}
+                className="flex items-center cursor-pointer gap-2 text-secondary hover:text-primary uppercase"
+              >
+                <p>Mi Perfil</p>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className={
+                    dropdownOpen ? "rotate-180 transition-all duration-75" : ""
+                  }
+                >
+                  <path
+                    d="M4 6L8 10L12 6"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </li>
+              {dropdownOpen && (
+                <div className="flex flex-col gap-4">
+                  <li>
+                    <p className="text-primary hover:text-primary uppercase">
+                      {user?.data.name}
+                    </p>
+                  </li>
+                  <li>
+                    <a
+                      href="/top-5"
+                      className="text-secondary hover:text-primary uppercase"
+                    >
+                      Top 5
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="/playlist"
+                      className="text-secondary hover:text-primary uppercase"
+                    >
+                      Playlist
+                    </a>
+                  </li>
+                  <li>
+                    <button
+                      onClick={logout}
+                      className="text-secondary hover:text-primary uppercase "
+                    >
+                      Cerrar Sesion
+                    </button>
+                  </li>
+                </div>
+              )}
+            </>
+          ) : (
+            <li>
+              <a
+                href="/login"
+                className="text-primary hover:text-[#ffd700cb] uppercase"
+              >
+                Ingresar
+              </a>
+            </li>
+          )}
         </ul>
       </nav>
     </div>
