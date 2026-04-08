@@ -1,6 +1,7 @@
 import { useState } from "react";
 import InputGroup from "../components/InputGroup";
 import { Link, useNavigate } from "react-router";
+import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
   const [loginData, setLoginData] = useState({
@@ -9,6 +10,7 @@ export default function Login() {
   });
   const [errores, setErrores] = useState({});
   const navigate = useNavigate();
+  const { login } = useAuth();
   function validarFormulario() {
     const nuevosErrores = {};
     if (!loginData.email) {
@@ -43,7 +45,7 @@ export default function Login() {
         );
         const data = await response.json();
         if (response.ok) {
-          localStorage.setItem("token", data.token);
+          login(data.token, data.user);
           navigate("/");
         } else {
           throw new Error(data.message || "Error al iniciar sesión");

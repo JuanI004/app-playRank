@@ -63,4 +63,21 @@ export const login = catchAsync(async (req, res) => {
   createSendToken(user, 200, res);
 });
 
-export default { signup, login };
+export const protect = catchAsync(async (req, res, next) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token)
+    return res
+      .status(401)
+      .json({ status: "fail", message: "No token provided" });
+
+  const decoded = jwt.verify(token, process.env.JWT_SECRET);
+  const currentUser = await User.findById(decoded.id);
+  if (!currentUser) {
+    throw new AppError("El usuario ya no existe", 401);
+  }
+
+  req.user = currentUser;
+  next();
+});
+
+export default { signup, login, protect };

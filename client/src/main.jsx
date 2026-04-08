@@ -15,6 +15,7 @@ import Top5 from "./pages/Top5.jsx";
 import Mood from "./pages/Mood.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -55,10 +56,12 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <Header />
-      <RouterProvider router={router} />
-      <Footer />
-    </QueryClientProvider>
+    <AuthProvider>
+      <QueryClientProvider client={queryClient}>
+        <Header />
+        <RouterProvider router={router} />
+        <Footer />
+      </QueryClientProvider>
+    </AuthProvider>
   </StrictMode>,
 );
