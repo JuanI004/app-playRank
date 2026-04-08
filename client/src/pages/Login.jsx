@@ -1,7 +1,58 @@
+import { useState } from "react";
 import InputGroup from "../components/InputGroup";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 
 export default function Login() {
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
+  const [errores, setErrores] = useState({});
+  const navigate = useNavigate();
+  function validarFormulario() {
+    const nuevosErrores = {};
+    if (!loginData.email) {
+      nuevosErrores.email = "Por favor, introduce tu email.";
+    }
+    if (loginData.email && !/\S+@\S+\.\S+/.test(loginData.email)) {
+      nuevosErrores.email = "Por favor, introduce un email válido.";
+    }
+    if (!loginData.password) {
+      nuevosErrores.password = "Por favor, introduce tu contraseña.";
+    }
+    if (loginData.password && loginData.password.length < 8) {
+      nuevosErrores.password =
+        "La contraseña debe tener al menos 8 caracteres.";
+    }
+    setErrores(nuevosErrores);
+    return Object.keys(nuevosErrores).length === 0;
+  }
+  async function handleSubmit(e) {
+    e.preventDefault();
+    if (validarFormulario()) {
+      try {
+        const response = await fetch(
+          "http://127.0.0.1:3000/api/v1/users/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(loginData),
+          },
+        );
+        const data = await response.json();
+        if (response.ok) {
+          localStorage.setItem("token", data.token);
+          navigate("/");
+        } else {
+          throw new Error(data.message || "Error al iniciar sesión");
+        }
+      } catch (error) {
+        setErrores({ general: error.message });
+      }
+    }
+  }
   return (
     <div
       className="relative w-screen min-h-screen flex gap-4 flex-col items-center justify-center overflow-hidden"
@@ -29,6 +80,7 @@ export default function Login() {
       <form
         className="bg-[#0a0a14] w-lg p-10 bg z-20 border border-[#ffd7003b]"
         style={{ boxShadow: "4px 4px 0 #aa88004b" }}
+        onSubmit={handleSubmit}
       >
         <ul className="flex flex-col gap-6">
           <li>
@@ -36,21 +88,41 @@ export default function Login() {
               label="Email:"
               type="email"
               name="email"
+              value={loginData.email}
               id="email"
               placeholder="tu@email.com"
+              onChange={(e) =>
+                setLoginData({ ...loginData, email: e.target.value })
+              }
             />
+            {errores.email && (
+              <p className="text-red-500 text-xs mt-1">{errores.email}</p>
+            )}
           </li>
           <li>
             <InputGroup
               label="Contraseña:"
               type="password"
               name="password"
+              value={loginData.password}
               id="password"
               placeholder="••••••••"
+              onChange={(e) =>
+                setLoginData({ ...loginData, password: e.target.value })
+              }
             />
+            {errores.password && (
+              <p className="text-red-500 text-xs mt-1">{errores.password}</p>
+            )}
           </li>
         </ul>
+        {errores.general && (
+          <p className="text-red-500 text-xs mt-4 text-center">
+            {errores.general}
+          </p>
+        )}
         <button
+          type="submit"
           className="py-4 px-8 mt-6 w-full bg-primary text-[#050508] text-xs font-pixel uppercase cursor-pointer hover:bg-[#ffc400] hover:scale-105 transition-transform duration-200 cursor-pointer"
           style={{ boxShadow: "4px 4px 0 #aa8800" }}
         >
