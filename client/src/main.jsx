@@ -13,6 +13,8 @@ import Precios from "./pages/Precios.jsx";
 import Playlist from "./pages/Playlist.jsx";
 import Top5 from "./pages/Top5.jsx";
 import Mood from "./pages/Mood.jsx";
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -40,6 +42,14 @@ const router = createBrowserRouter([
   {
     path: "/recomendacion",
     element: <Mood />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <Signup />,
   },
 ]);
 
