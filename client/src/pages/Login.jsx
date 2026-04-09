@@ -10,7 +10,8 @@ export default function Login() {
   });
   const [errores, setErrores] = useState({});
   const navigate = useNavigate();
-  const { login } = useAuth();
+  const { login, user } = useAuth();
+  if (user) navigate("/");
   function validarFormulario() {
     const nuevosErrores = {};
     if (!loginData.email) {

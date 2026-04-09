@@ -11,7 +11,8 @@ export default function Signup() {
     password: "",
     passwordConfirm: "",
   });
-  const { login } = useAuth();
+  const { login, user } = useAuth();
+  if (user) navigate("/");
   const navigate = useNavigate();
   const [errores, setErrores] = useState({});
   function validarFormulario() {

@@ -5,7 +5,6 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const { logout, user } = useAuth();
-  console.log(user);
 
   return (
     <div className="fixed top-0 left-0 right-0  flex flex-col bg-[#060509d7] border-b border-[#ffd90079] z-30 ">

@@ -11,7 +11,7 @@ export default function Top5() {
     index: null,
   });
   const { playlist } = usePlaylist();
-
+  console.log("Top5:", top5);
   const cantTop5 = top5.length;
 
   const filtered = playlist.filter(

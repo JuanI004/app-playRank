@@ -16,6 +16,7 @@ import Mood from "./pages/Mood.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -34,11 +35,19 @@ const router = createBrowserRouter([
   },
   {
     path: "/playlist",
-    element: <Playlist />,
+    element: (
+      <ProtectedRoute>
+        <Playlist />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/top-5",
-    element: <Top5 />,
+    element: (
+      <ProtectedRoute>
+        <Top5 />
+      </ProtectedRoute>
+    ),
   },
   {
     path: "/recomendacion",
