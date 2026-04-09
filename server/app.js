@@ -3,6 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import userRoute from "./routes/userRoute.js";
+import top5Route from "./routes/top5Route.js";
 
 const app = express();
 
@@ -21,5 +22,6 @@ app.use(express.json());
 
 // Routes
 app.use("/api/v1/users", userRoute);
+app.use("/api/v1/top-5", top5Route);
 
 export default app;

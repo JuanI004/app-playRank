@@ -16,7 +16,7 @@ export default function Top5() {
 
   const filtered = playlist.filter(
     (g) =>
-      !top5.some((t) => t.id === g.id) &&
+      !top5.some((t) => t?.id === g.id) &&
       g.name.toLowerCase().includes(buscarModal.search?.toLowerCase()),
   );
 
