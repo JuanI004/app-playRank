@@ -120,7 +120,7 @@ export default function Top5() {
       <main className="relative max-w-[1200px] mx-auto flex gap-10 flex-col p-4">
         <div className="flex flex-col sm:flex-row items-center gap-4 w-full justify-between mt-10  ">
           <div className="flex flex-col text-center sm:text-start gap-4">
-            <h1 className="font-pixel text-primary text-md text-shadow-[0_5px_35px_rgba(0,255,255,0.50)]">
+            <h1 className="font-pixel text-primary text-md text-shadow-[0_5px_35px_rgba(255,215,0,0.50)]">
               {">> " + "MI TOP 5" + " <<"}
             </h1>
             <h1 className="text-xs font-pixel uppercase text-secondary ">

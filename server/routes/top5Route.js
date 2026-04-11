@@ -8,7 +8,7 @@ router.use(protect);
 
 router.get("/", top5Controller.getTop5);
 router.post("/", top5Controller.setTop5);
-router.delete("/reorder", top5Controller.removeFromTop5);
-router.put("/:position", top5Controller.reorderTop5);
+router.delete("/:position", top5Controller.removeFromTop5);
+router.put("/reorder", top5Controller.reorderTop5);
 
 export default router;

@@ -28,7 +28,13 @@ export default function useTop5() {
       const data = await res.json();
       const top = Array(5).fill(null);
       data.data.forEach((entry) => {
-        top[entry.position - 1] = entry.gameId;
+        const game = entry.game
+          ? {
+              ...entry.game,
+              id: entry.game.id ?? entry.game.gameId,
+            }
+          : null;
+        top[entry.position - 1] = game;
       });
       return top;
     },
@@ -86,12 +92,12 @@ export default function useTop5() {
   });
 
   const isInTop5 = (gameId) => {
-    return top5.some((g) => g?.gameId === gameId);
+    return top5.some((g) => g?.id === gameId);
   };
 
   const toggleInTop5 = (game) => {
     if (isInTop5(game.id)) {
-      const index = top5.findIndex((g) => g.gameId === game.id);
+      const index = top5.findIndex((g) => g?.id === game.id);
       removeEntrada.mutate(index + 1);
     } else {
       const emptyIndex = top5.findIndex((g) => g === null);
@@ -109,14 +115,22 @@ export default function useTop5() {
     if (index === 0) return;
     const newTop5 = [...top5];
     [newTop5[index], newTop5[index - 1]] = [newTop5[index - 1], newTop5[index]];
-    reordenar.mutate(newTop5.map((gameId, i) => ({ gameId, position: i + 1 })));
+    reordenar.mutate(
+      newTop5
+        .filter(Boolean)
+        .map((game, i) => ({ gameId: game.id, position: i + 1 })),
+    );
   };
 
   const moveDown = (index) => {
     if (index === top5.length - 1) return;
     const newTop5 = [...top5];
     [newTop5[index], newTop5[index + 1]] = [newTop5[index + 1], newTop5[index]];
-    reordenar.mutate(newTop5.map((gameId, i) => ({ gameId, position: i + 1 })));
+    reordenar.mutate(
+      newTop5
+        .filter(Boolean)
+        .map((game, i) => ({ gameId: game.id, position: i + 1 })),
+    );
   };
 
   const clearTop5 = () => {
