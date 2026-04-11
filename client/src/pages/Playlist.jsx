@@ -78,7 +78,7 @@ export default function Playlist() {
                 {s.label}
               </h3>
               <h2 className={`font-pixel text-[1.6rem] text-[${s.color}]`}>
-                {s.value}
+                {s.value > 0 ? s.value : 0}
               </h2>
             </div>
           ))}

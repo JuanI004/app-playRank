@@ -28,7 +28,7 @@ export const setTop5 = catchAsync(async (req, res) => {
   const { gameId, position } = req.body;
 
   if (!gameId || !position) {
-    throw new AppError("JgameRawgId y position son requeridos", 400);
+    throw new AppError("gameId y position son requeridos", 400);
   }
 
   const juego = await cacheJuego(gameId);
