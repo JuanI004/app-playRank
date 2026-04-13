@@ -5,6 +5,7 @@ import rateLimit from "express-rate-limit";
 import userRoute from "./routes/userRoute.js";
 import top5Route from "./routes/top5Route.js";
 import playlistRoute from "./routes/playlistRoute.js";
+import reviewRoute from "./routes/reviewRoute.js";
 
 const app = express();
 
@@ -25,5 +26,6 @@ app.use(express.json());
 app.use("/api/v1/users", userRoute);
 app.use("/api/v1/top-5", top5Route);
 app.use("/api/v1/playlist", playlistRoute);
+app.use("/api/v1/reviews", reviewRoute);
 
 export default app;

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const reviewSchema = new mongoose.Schema(
   {
-    user: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
@@ -30,7 +30,7 @@ const reviewSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-reviewSchema.index({ userId: 1, gameRawgId: 1 }, { unique: true });
+reviewSchema.index({ userId: 1, gameId: 1 }, { unique: true });
 
 const Review = mongoose.model("Review", reviewSchema);
 

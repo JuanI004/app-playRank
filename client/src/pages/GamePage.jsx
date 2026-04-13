@@ -38,8 +38,8 @@ export default function GamePage() {
         : "text-[#ff6b6b] border-[#ff6b6b]";
 
   function handleSubmitRating(cant) {
-    setEstrellasHover({ cant });
-    AddRating(id, cant);
+    setEstrellasHover({ cant, fixed: true });
+    AddRating.mutate({ gameId: Number(id), stars: cant });
   }
 
   function handleAddPlaylist() {
@@ -229,7 +229,7 @@ export default function GamePage() {
               <section className="px-6 py-10 flex flex-col gap-4 bg-[#0a0a14] border border-[#3f361a]">
                 <h3 className="font-pixel text-primary text-xs">MI RATING</h3>
                 <div
-                  className="flex gap-0.5 items-center"
+                  className="flex gap-0.5 items-center "
                   onMouseLeave={() =>
                     !estrellasHover.fixed &&
                     setEstrellasHover({ cant: ratingJuego, fixed: false })
@@ -243,7 +243,7 @@ export default function GamePage() {
                         setEstrellasHover({ cant: s, fixed: false })
                       }
                       onClick={() => handleSubmitRating(s)}
-                      className="text-[2rem] cursor-default"
+                      className="text-[2rem] cursor-pointer"
                       style={{
                         color: s < estrellasHover.cant + 1 ? "#ffd700" : "#333",
                       }}

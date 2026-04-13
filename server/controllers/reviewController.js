@@ -10,7 +10,7 @@ export const getGameReviews = catchAsync(async (req, res) => {
     throw new AppError("gameId es requerido", 400);
   }
 
-  const reviews = Review.find({ gameId: Number(gameId) })
+  const reviews = await Review.find({ gameId: Number(gameId) })
     .populate("userId", "name img")
     .sort({ createdAt: -1 });
 
@@ -27,13 +27,9 @@ export const getGameReviews = catchAsync(async (req, res) => {
 });
 
 export const getMyReviews = catchAsync(async (req, res) => {
-  const { gameId, userId } = req.body;
-
-  if (!gameId || !userId) {
-    throw new AppError("gameId y userId son requeridos", 400);
-  }
-
-  const reviews = Review.find({ gameId, userId }).sort({ createdAt: -1 });
+  const reviews = await Review.find({ userId: req.user._id }).sort({
+    createdAt: -1,
+  });
 
   res.status(200).json({
     status: "success",
@@ -42,20 +38,19 @@ export const getMyReviews = catchAsync(async (req, res) => {
 });
 
 export const addReview = catchAsync(async (req, res) => {
-  const { gameId, userId, stars, comment } = req.body;
+  const { gameId, stars, text } = req.body;
 
-  if (!gameId || !userId || !stars) {
-    throw new AppError("gameId, userId y stars son requeridos", 400);
+  if (!gameId || !stars) {
+    throw new AppError("gameId y stars son requeridos", 400);
   }
 
   await cacheJuego(gameId);
 
-  const existingReview = await Review.findOne({ gameId, userId });
-  if (existingReview) {
-    throw new AppError("Ya has reseñado este juego", 400);
-  }
-
-  const review = await Review.create({ gameId, userId, stars, comment });
+  const review = await Review.findOneAndUpdate(
+    { userId: req.user._id, gameId: Number(gameId) },
+    { stars, text },
+    { upsert: true, returnDocument: "after", runValidators: true },
+  );
 
   res.status(201).json({
     status: "success",
@@ -65,11 +60,10 @@ export const addReview = catchAsync(async (req, res) => {
 
 export const deleteReview = catchAsync(async (req, res) => {
   const { gameId } = req.params;
-  const { userId } = req.body;
 
   const review = await Review.findOneAndDelete({
     gameId: Number(gameId),
-    userId,
+    userId: req.user._id,
   });
 
   if (!review) {

@@ -2,14 +2,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useAuth } from "../context/AuthContext";
 
-const API_URL = import.meta.env.API_URL || "http://127.0.0.1:3000/api/v1";
-
-function authHeader() {
-  const token = localStorage.getItem("token");
-  return token
-    ? { "Content-Type": "application/json", Authorization: `Bearer ${token}` }
-    : {};
-}
+import { authHeader, API_URL } from "../utils/authHeader";
 
 export default function usePlaylist() {
   const { user } = useAuth();
