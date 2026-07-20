@@ -87,7 +87,7 @@ export default function Signup() {
         {">> " + "REGISTRARSE" + " <<"}
       </h2>
       <form
-        className="bg-[#0a0a14] w-lg p-10 bg z-20 border border-[#ffd7003b]"
+        className="bg-[#0a0a14] w-[90vw] max-w-lg p-6 sm:p-10 bg z-20 border border-[#ffd7003b]"
         style={{ boxShadow: "4px 4px 0 #aa88004b" }}
         onSubmit={handleSubmit}
       >

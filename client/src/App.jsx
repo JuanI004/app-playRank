@@ -72,7 +72,7 @@ function App() {
           <h1 className='text-[2rem] font-pixel uppercase text-primary mt-20'
           style={{textShadow:"3px 3px 0 #000, 0 0 20px #ffd70088", animation:"glitch 6s infinite"}}>GAME OVER?</h1>
           <p className='font-pixel text-sm text-[#01fb7a] mt-2'>NO WAY.</p>
-          <p className='font-inter text-md w-md text-center text-secondary mt-2'>
+          <p className='font-inter text-md w-full max-w-md px-4 text-center text-secondary mt-2'>
             Miles de gamers ya están rankeando sus juegos favoritos. Falta tu opinión
           </p>
           <Link to="/juegos">
