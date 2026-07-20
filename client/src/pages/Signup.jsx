@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import { API_URL } from "../utils/authHeader";
 
 export default function Signup() {
   const [signupData, setSignupData] = useState({
@@ -39,16 +40,13 @@ export default function Signup() {
     e.preventDefault();
     if (validarFormulario()) {
       try {
-        const response = await fetch(
-          "http://127.0.0.1:3000/api/v1/users/signup",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(signupData),
+        const response = await fetch(`${API_URL}/users/signup`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
+          body: JSON.stringify(signupData),
+        });
         const data = await response.json();
         if (response.ok) {
           login(data.token, data.user);

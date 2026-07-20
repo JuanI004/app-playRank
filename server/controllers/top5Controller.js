@@ -72,7 +72,12 @@ export const removeFromTop5 = catchAsync(async (req, res) => {
 export const reorderTop5 = catchAsync(async (req, res) => {
   const { entries } = req.body;
 
-  if (!entries || !Array.isArray(entries) || entries.length > 5) {
+  if (
+    !entries ||
+    !Array.isArray(entries) ||
+    entries.length > 5 ||
+    entries.some((entry) => !Number.isInteger(entry.gameId))
+  ) {
     throw new AppError("Se requieren entre 1 y 5 entradas", 400);
   }
 

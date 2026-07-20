@@ -38,16 +38,17 @@ export const getMyReviews = catchAsync(async (req, res) => {
 });
 
 export const addReview = catchAsync(async (req, res) => {
-  const { gameId, stars, text } = req.body;
+  const gameId = Number(req.body.gameId);
+  const { stars, text } = req.body;
 
-  if (!gameId || !stars) {
+  if (!Number.isInteger(gameId) || gameId <= 0 || !stars) {
     throw new AppError("gameId y stars son requeridos", 400);
   }
 
   await cacheJuego(gameId);
 
   const review = await Review.findOneAndUpdate(
-    { userId: req.user._id, gameId: Number(gameId) },
+    { userId: req.user._id, gameId },
     { stars, text },
     { upsert: true, returnDocument: "after", runValidators: true },
   );

@@ -2,6 +2,7 @@ import { useState } from "react";
 import InputGroup from "../components/InputGroup";
 import { Link, useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
+import { API_URL } from "../utils/authHeader";
 
 export default function Login() {
   const [loginData, setLoginData] = useState({
@@ -34,16 +35,13 @@ export default function Login() {
     e.preventDefault();
     if (validarFormulario()) {
       try {
-        const response = await fetch(
-          "http://127.0.0.1:3000/api/v1/users/login",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(loginData),
+        const response = await fetch(`${API_URL}/users/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
           },
-        );
+          body: JSON.stringify(loginData),
+        });
         const data = await response.json();
         if (response.ok) {
           login(data.token, data.user);

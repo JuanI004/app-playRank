@@ -4,6 +4,8 @@ import dotenv from "dotenv";
 dotenv.config({ path: "./config.env" });
 import app from "./app.js";
 
+mongoose.set("sanitizeFilter", true);
+
 const port = process.env.PORT || 3000;
 
 const DB = process.env.DATABASE_URL.replace(

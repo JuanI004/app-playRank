@@ -1,4 +1,5 @@
 import { useParams } from "react-router";
+import DOMPurify from "dompurify";
 import useFetchInfoJuego from "../hooks/useFetchInfoJuego";
 import InfoSection from "../components/InfoSection";
 import usePlaylist from "../hooks/usePlaylist";
@@ -138,7 +139,9 @@ export default function GamePage() {
               </h3>
               <p
                 className="font-inter text-secondary text-md mt-4"
-                dangerouslySetInnerHTML={{ __html: juego.data?.description }}
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(juego.data?.description || ""),
+                }}
               ></p>
 
               <h3 className="font-pixel text-[#00ffff] text-sm mb-4 text-shadow-[0_5px_35px_rgba(0,255,255,0.50)] mt-10">
