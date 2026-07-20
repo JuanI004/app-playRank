@@ -25,9 +25,16 @@ export const getTop5 = catchAsync(async (req, res) => {
 });
 
 export const setTop5 = catchAsync(async (req, res) => {
-  const { gameId, position } = req.body;
+  const gameId = Number(req.body.gameId);
+  const position = Number(req.body.position);
 
-  if (!gameId || !position) {
+  if (
+    !Number.isInteger(gameId) ||
+    gameId <= 0 ||
+    !Number.isInteger(position) ||
+    position < 1 ||
+    position > 5
+  ) {
     throw new AppError("gameId y position son requeridos", 400);
   }
 

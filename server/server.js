@@ -3,8 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config({ path: "./config.env" });
 import app from "./app.js";
-
-mongoose.set("sanitizeFilter", true);
+import Review from "./models/ReviewModel.js";
 
 const port = process.env.PORT || 3000;
 
@@ -13,8 +12,9 @@ const DB = process.env.DATABASE_URL.replace(
   process.env.DATABASE_PASSWORD,
 );
 
-mongoose.connect(DB).then(() => {
+mongoose.connect(DB).then(async () => {
   console.log("DB connection established");
+  await Review.syncIndexes();
 });
 
 const server = app.listen(port, () => {

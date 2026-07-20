@@ -39,12 +39,16 @@ export default function useRatings() {
         body: JSON.stringify({ gameId, stars }),
       });
       if (!res.ok) {
-        throw new Error("Error al agregar la reseña");
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.message || "Error al agregar la reseña");
       }
       return await res.json();
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["ratings"] });
+    },
+    onError: (error) => {
+      console.error("No se pudo guardar el rating:", error.message);
     },
   });
 

@@ -15,7 +15,7 @@ app.set("trust proxy", 1);
 
 // Middleware
 const allowedOrigins = (
-  process.env.CLIENT_URL || "http://localhost:5173"
+  process.env.CLIENT_URL || "http://localhost:5173,http://127.0.0.1:5173"
 ).split(",");
 app.use(cors({ origin: allowedOrigins }));
 app.use(helmet());

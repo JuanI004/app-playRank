@@ -30,8 +30,8 @@ export default function Signup() {
     if (!signupData.password) {
       nuevosErrores.password = "Por favor, introduce tu contraseña.";
     }
-    if (signupData.password !== signupData.confirmPassword) {
-      nuevosErrores.confirmPassword = "Las contraseñas no coinciden.";
+    if (signupData.password !== signupData.passwordConfirm) {
+      nuevosErrores.passwordConfirm = "Las contraseñas no coinciden.";
     }
     setErrores(nuevosErrores);
     return Object.keys(nuevosErrores).length === 0;
@@ -153,9 +153,9 @@ export default function Signup() {
               }
               placeholder="••••••••"
             />
-            {errores.confirmPassword && (
+            {errores.passwordConfirm && (
               <p className="text-red-500 text-xs mt-1">
-                {errores.confirmPassword}
+                {errores.passwordConfirm}
               </p>
             )}
           </li>
