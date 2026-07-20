@@ -47,7 +47,7 @@ export default function Top5Card({
             ? "3px 3px 0 rgba(255,215,0,0.15)"
             : "3px 3px 0 transparent",
       }}
-      onClick={!juego && onClick}
+      onClick={!juego ? onClick : undefined}
     >
       <div className="flex p-4 py-6 justify-center items-center gap-4">
         <h1 className={`text-[2.5rem] font-pixel ${rating}`}>#{index + 1}</h1>

@@ -73,7 +73,10 @@ export default function Playlist() {
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 ">
           {SECCIONES.map((s) => (
-            <div className="bg-[#0a0a14] border p-6 border-[#202020a6]">
+            <div
+              key={s.label}
+              className="bg-[#0a0a14] border p-6 border-[#202020a6]"
+            >
               <h3 className="text-secondary font-pixel mb-4 text-xs">
                 {s.label}
               </h3>

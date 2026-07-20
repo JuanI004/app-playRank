@@ -2,7 +2,7 @@ import InputGroup from "../components/InputGroup";
 import { Link } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { API_URL } from "../utils/authHeader";
 
 export default function Signup() {
@@ -13,8 +13,10 @@ export default function Signup() {
     passwordConfirm: "",
   });
   const { login, user } = useAuth();
-  if (user) navigate("/");
   const navigate = useNavigate();
+  useEffect(() => {
+    if (user) navigate("/");
+  }, [user, navigate]);
   const [errores, setErrores] = useState({});
   function validarFormulario() {
     const nuevosErrores = {};
@@ -49,7 +51,7 @@ export default function Signup() {
         });
         const data = await response.json();
         if (response.ok) {
-          login(data.token, data.user);
+          login(data.token, { data: data.data.user });
           navigate("/");
         } else {
           throw new Error(data.message || "Error al crear la cuenta");

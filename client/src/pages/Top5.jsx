@@ -143,6 +143,7 @@ export default function Top5() {
         <div className="flex flex-col gap-4">
           {[0, 1, 2, 3, 4].map((index) => (
             <Top5Card
+              key={index}
               juego={top5[index]}
               index={index}
               onRemove={() => handleRemove(index)}
