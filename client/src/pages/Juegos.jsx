@@ -72,6 +72,7 @@ export default function Juegos() {
           <Filter
             label="Genero"
             items={GENRES}
+            value={fetchInfo.genero ?? ""}
             onSelect={(value) => {
               setFetchInfo({ ...fetchInfo, genero: value });
             }}
@@ -79,6 +80,7 @@ export default function Juegos() {
           <Filter
             label="Plataforma"
             items={PLATFORMS}
+            value={fetchInfo.plataforma ?? ""}
             onSelect={(value) =>
               setFetchInfo({ ...fetchInfo, plataforma: value })
             }
@@ -86,6 +88,7 @@ export default function Juegos() {
           <Filter
             label="Ordenar"
             items={ORDERING}
+            value={fetchInfo.orden ?? "-ratings_count"}
             onSelect={(value) => setFetchInfo({ ...fetchInfo, orden: value })}
           />
           {(fetchInfo.search ||

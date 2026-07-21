@@ -9,8 +9,11 @@
   --font-pixel: "Press Start 2P", monospace;
   --font-inter: "Inter", sans-serif;
 }
-html {  
-  scroll-behavior: smooth; 
+html, body {
+  background-color: #050508;
+}
+html {
+  scroll-behavior: smooth;
 }
 ::-webkit-scrollbar { 
   width: 6px;
