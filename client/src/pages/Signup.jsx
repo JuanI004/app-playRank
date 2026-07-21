@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router";
 import { useState, useEffect } from "react";
 import { API_URL } from "../utils/authHeader";
+import SEO from "../components/SEO";
 
 export default function Signup() {
   const [signupData, setSignupData] = useState({
@@ -73,6 +74,10 @@ export default function Signup() {
         backgroundSize: "78px 78px",
       }}
     >
+      <SEO
+        title="Crear cuenta"
+        description="Creá tu cuenta gratis en PlayRank y empezá a rankear tus juegos favoritos."
+      />
       <span
         className="absolute w-screen min-h-screen z-10"
         style={{
@@ -80,12 +85,12 @@ export default function Signup() {
             "radial-gradient(ellipse at center,rgba(255, 215, 0, 0.07) 0%,transparent 65%)",
         }}
       />
-      <h1 href="/" className="text-xl font-pixel text-primary z-20">
+      <Link to="/" className="text-xl font-pixel text-primary z-20">
         PlayRank
-      </h1>
-      <h2 className="font-pixel text-[#00ffff] text-md z-20">
+      </Link>
+      <h1 className="font-pixel text-[#00ffff] text-md z-20">
         {">> " + "REGISTRARSE" + " <<"}
-      </h2>
+      </h1>
       <form
         className="bg-[#0a0a14] w-[90vw] max-w-lg p-6 sm:p-10 bg z-20 border border-[#ffd7003b]"
         style={{ boxShadow: "4px 4px 0 #aa88004b" }}

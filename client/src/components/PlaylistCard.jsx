@@ -25,6 +25,7 @@ export default function PlaylistCard({ juego, rating = 0, onDelete }) {
         <img
           src={juego.background_image}
           alt={juego.name}
+          loading="lazy"
           className="w-full h-48 object-cover"
         />
         <div className="absolute bottom-0 bg-linear-to-t from-[#050508] to-transparent w-full h-[50%]" />

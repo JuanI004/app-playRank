@@ -1,6 +1,7 @@
 import { useParams } from "react-router"
 import { useState } from "react"
 import useFetchPrecios from "../hooks/useFetchPrecios"
+import SEO from "../components/SEO"
 
 export default function Precios() {
   const { nombreJuego } = useParams()
@@ -23,19 +24,23 @@ export default function Precios() {
   
   return (
     <div className="w-screen min-h-screen bg-bg pt-[65px] pb-20">
+      <SEO
+        title={`Precios de ${nombreJuego}`}
+        description={`Comparé precios de ${nombreJuego} en distintas tiendas y encontrá la mejor oferta para comprarlo.`}
+      />
 
       <main className="relative max-w-[1200px] mx-auto flex flex-col gap-4">
         <div className="flex w-full justify-between mt-10 p-4">
           <div className="flex flex-col gap-4"> 
             <button onClick={() => window.history.back()} className="font-pixel text-primary text-xs border border-primary py-4 w-30 cursor-pointer hover:bg-[#ffd90023] cursor pointer transition-colors">VOLVER</button>
-            <h1 className='font-pixel text-[#00ffff] text-md text-shadow-[0_5px_35px_rgba(0,255,255,0.50)]'>{">> " + "PRECIOS" + " <<"}</h1>
+            <h2 className='font-pixel text-[#00ffff] text-md text-shadow-[0_5px_35px_rgba(0,255,255,0.50)]'>{">> " + "PRECIOS" + " <<"}</h2>
             <h1 className="text-lg font-pixel uppercase text-white ">{nombreJuego}</h1>
           </div>
 
           {cheapestPrice && normalPrice && 
             <div className="flex flex-col gap-2 bg-[#0a0a14] border p-2 border-[#00ff88] shadow-[0_0_20px_rgba(0,255,136,0.2)] flex justify-center items-center">
               <p className="font-pixel text-secondary text-xs p-2 ">Mejor Precio</p>
-              <h1 className="text-xl font-pixel text-[#00ff88]">${cheapestPrice?.toFixed(2)}</h1>
+              <h2 className="text-xl font-pixel text-[#00ff88]">${cheapestPrice?.toFixed(2)}</h2>
               <p className="text-md font-pixel font-Inter text-[#525252] line-through">${normalPrice?.toFixed(2)}</p>
             </div>
           }
@@ -70,7 +75,7 @@ export default function Precios() {
                     <div className="flex w-[40%] flex-col  md:ml-auto items-center md:items-baseline gap-1">
 
                       <div className="flex items-center gap-2">
-                        <h1 className={`text-lg font-pixel ${mejorPrecio ? "text-[#00ff88]" : "text-primary"}`}>${parseFloat(deal.price).toFixed(2)}</h1>
+                        <p className={`text-lg font-pixel ${mejorPrecio ? "text-[#00ff88]" : "text-primary"}`}>${parseFloat(deal.price).toFixed(2)}</p>
                        {descuento > 0 && ( 
                           <>
                             <p className="text-md font-pixel font-Inter text-[#525252] line-through">${parseFloat(deal.retailPrice).toFixed(2)}</p>

@@ -2,11 +2,17 @@ import { useParams } from "react-router";
 import DOMPurify from "dompurify";
 import useFetchInfoJuego from "../hooks/useFetchInfoJuego";
 import InfoSection from "../components/InfoSection";
+import SEO from "../components/SEO";
 import usePlaylist from "../hooks/usePlaylist";
 import useTop5 from "../hooks/useTop5";
 import useRatings from "../hooks/useRatings";
 import { useState } from "react";
 import { useNavigate } from "react-router";
+
+function truncate(text, max) {
+  if (!text) return "";
+  return text.length > max ? `${text.slice(0, max - 1).trim()}…` : text;
+}
 
 export default function GamePage() {
   const { id } = useParams();
@@ -81,8 +87,42 @@ export default function GamePage() {
     );
   }
 
+  const description = truncate(
+    juego.data?.description_raw ||
+      `Descubrí el rating, precios y reseñas de ${juego.data?.name} en PlayRank.`,
+    155,
+  );
+
+  const jsonLd = juego.data && {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    name: juego.data.name,
+    description,
+    image: juego.data.background_image,
+    datePublished: juego.data.released,
+    genre: juego.data.genres?.map((g) => g.name),
+    playMode: "SinglePlayer",
+    ...(juego.data.platforms?.length > 0 && {
+      gamePlatform: juego.data.platforms.map((p) => p.platform.name),
+    }),
+    ...(juego.data.rating > 0 && {
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: juego.data.rating,
+        bestRating: 5,
+        ratingCount: juego.data.ratings_count,
+      },
+    }),
+  };
+
   return (
     <div className="w-screen min-h-screen bg-bg pt-[65px]  pb-5">
+      <SEO
+        title={juego.data?.name}
+        description={description}
+        image={juego.data?.background_image}
+        jsonLd={jsonLd}
+      />
       <div className="relative w-full">
         <img
           src={juego.data?.background_image}
@@ -154,6 +194,7 @@ export default function GamePage() {
                     onClick={() => setImagenSelect(s.image)}
                     src={s.image}
                     alt={juego.data?.name}
+                    loading="lazy"
                     className=" h-full object-cover border cursor-pointer border-white"
                   />
                 ))}

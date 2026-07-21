@@ -1,6 +1,7 @@
 import useTop5 from "../hooks/useTop5";
 import Top5Card from "../components/Top5Card";
 import usePlaylist from "../hooks/usePlaylist";
+import SEO from "../components/SEO";
 import { useState } from "react";
 
 export default function Top5() {
@@ -43,6 +44,10 @@ export default function Top5() {
 
   return (
     <div className="w-screen min-h-screen bg-bg pt-[65px] pb-20">
+      <SEO
+        title="Mi Top 5"
+        description="Tu lista personal de los mejores juegos en PlayRank."
+      />
       {buscarModal.active && (
         <div className="fixed inset-0 bg-[#000000cc] flex items-center justify-center z-50">
           <div
@@ -123,9 +128,9 @@ export default function Top5() {
             <h1 className="font-pixel text-primary text-md text-shadow-[0_5px_35px_rgba(255,215,0,0.50)]">
               {">> " + "MI TOP 5" + " <<"}
             </h1>
-            <h1 className="text-xs font-pixel uppercase text-secondary ">
+            <h2 className="text-xs font-pixel uppercase text-secondary ">
               {cantTop5}/5 POSICIONES OCUPADAS
-            </h1>
+            </h2>
           </div>
           {cantTop5 > 0 && (
             <button

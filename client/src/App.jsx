@@ -1,5 +1,6 @@
 import useTopGames from './hooks/useTopGames'
 import GameCard from './components/GameCard';
+import SEO from './components/SEO';
 import { Link } from 'react-router';
 import './App.css'
 
@@ -16,6 +17,10 @@ function App() {
   const { data: topGames, isLoading, error } = useTopGames();
   return (
     <>
+      <SEO
+        title="Rateá, rankeá y descubrí videojuegos"
+        description="Rateá tus juegos favoritos, armá tu Top 5, descubrí qué jugar según tu mood y encontrá los mejores precios en PlayRank."
+      />
       <div className='scanlines relative min-h-screen w-screen bg-[url(assets/background.avif)] bg-cover bg-center '>
         <div className="absolute top-0 left-0 w-full h-[3px] bg-[rgba(0,255,200,0.15)] z-5" 
             style={{animation:"scanline 4s linear infinite"}}/>
@@ -41,7 +46,7 @@ function App() {
       </div>
 
       <section className='min-h-screen w-screen flex flex-col items-center justify-center p-20 bg-black'>
-       <h1 className='font-pixel text-[#ff6b6b] text-xl text-shadow-[0_5px_35px_rgba(255,107,107,0.50)]'>{">> " + "CARACTERISTICAS" + " <<"}</h1>
+       <h2 className='font-pixel text-[#ff6b6b] text-xl text-shadow-[0_5px_35px_rgba(255,107,107,0.50)]'>{">> " + "CARACTERISTICAS" + " <<"}</h2>
         <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-8'>
           {CARACTERISTICAS.map((caracteristica, index) => (
             <div key={index} className='caracteristica flex flex-col items-center text-center p-7 bg-[#050508] border border-[#ffd7004b] hover:scale-102 transition-transform duration-200' >
@@ -53,7 +58,7 @@ function App() {
       </section>
 
       <section className='min-h-screen w-screen flex flex-col items-center justify-center p-20 bg-[#050508]'>
-        <h1 className='font-pixel text-[#00ffff] text-xl text-shadow-[0_5px_35px_rgba(0,255,255,0.50)]'>{">> " + "TOP JUEGOS" + " <<"}</h1>
+        <h2 className='font-pixel text-[#00ffff] text-xl text-shadow-[0_5px_35px_rgba(0,255,255,0.50)]'>{">> " + "TOP JUEGOS" + " <<"}</h2>
         {isLoading && <div className='w-10 h-10 border-1 border-primary border-t-0 border-r-0 animate-spin mt-10 rounded-full'/>}
         {error && <p className='text-red-500 mt-4'>Error al cargar juegos</p>}
         <div className='grid grid-cols-1 md:grid-cols-3 gap-6 mt-8'>
@@ -69,8 +74,8 @@ function App() {
         <div className="absolute inset-0 background-radial " 
             style={{background:"radial-gradient(ellipse at center, #0505089f 1%, #050508 100%)"}}/>
         <div className='flex flex-col gap-4 items-center justify-center z-5 relative'>
-          <h1 className='text-[2rem] font-pixel uppercase text-primary mt-20'
-          style={{textShadow:"3px 3px 0 #000, 0 0 20px #ffd70088", animation:"glitch 6s infinite"}}>GAME OVER?</h1>
+          <h2 className='text-[2rem] font-pixel uppercase text-primary mt-20'
+          style={{textShadow:"3px 3px 0 #000, 0 0 20px #ffd70088", animation:"glitch 6s infinite"}}>GAME OVER?</h2>
           <p className='font-pixel text-sm text-[#01fb7a] mt-2'>NO WAY.</p>
           <p className='font-inter text-md w-full max-w-md px-4 text-center text-secondary mt-2'>
             Miles de gamers ya están rankeando sus juegos favoritos. Falta tu opinión

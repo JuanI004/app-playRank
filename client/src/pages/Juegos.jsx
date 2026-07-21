@@ -2,6 +2,7 @@ import SearchBar from "../components/SearchBar";
 import GameCard from "../components/GameCard";
 import CardVacia from "../components/CardVacia";
 import Filter from "../components/Filter";
+import SEO from "../components/SEO";
 import useFetchJuegos from "../hooks/useFetchJuegos";
 import { useState, useEffect } from "react";
 import { GENRES, PLATFORMS, ORDERING } from "../utils/categorias";
@@ -30,6 +31,10 @@ export default function Juegos() {
 
   return (
     <div className="w-screen min-h-screen bg-[#050508] p-4 pt-21.25 pb-5">
+      <SEO
+        title="Explorar juegos"
+        description="Explorá el catálogo completo de juegos, filtrá por género y plataforma, y descubrí tu próximo favorito en PlayRank."
+      />
       <main className="max-w-300 mx-auto flex flex-col gap-4">
         <div className="flex flex-col md:flex-row md:justify-between gap-4 items-center">
           <h1 className="font-pixel text-[#00ffff] text-md text-shadow-[0_5px_35px_rgba(0,255,255,0.50)]">
@@ -53,9 +58,9 @@ export default function Juegos() {
             alt="Banner"
             className="w-full h-full object-cover object-center absolute brightness-40"
           />
-          <h1 className="font-pixel text-primary text-[1.3rem] z-10">
+          <h2 className="font-pixel text-primary text-[1.3rem] z-10">
             NO SABES QUE JUGAR?
-          </h1>
+          </h2>
           <p className="font-inter text-secondary text-sm z-10">
             Decinos tu mood y te recomendamos el juego perfecto para hoy.
           </p>

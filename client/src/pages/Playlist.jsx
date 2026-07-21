@@ -1,6 +1,7 @@
 import usePlaylist from "../hooks/usePlaylist";
 import useRatings from "../hooks/useRatings";
 import PlaylistCard from "../components/PlaylistCard";
+import SEO from "../components/SEO";
 import { useNavigate } from "react-router";
 
 export default function Playlist() {
@@ -50,17 +51,18 @@ export default function Playlist() {
 
   return (
     <div className="w-screen min-h-screen bg-bg pt-[65px] pb-20">
+      <SEO title="Mi Playlist" description="Tu lista de juegos guardados en PlayRank." />
       <main className="relative max-w-[1200px] mx-auto flex gap-10 flex-col p-4">
         <div className="flex w-full justify-between mt-10  ">
           <div className="flex flex-col gap-4">
             <h1 className="font-pixel text-[#00ffff] text-md text-shadow-[0_5px_35px_rgba(0,255,255,0.50)]">
               {">> " + "PLAYLIST" + " <<"}
             </h1>
-            <h1 className="text-xs font-pixel uppercase text-secondary ">
+            <h2 className="text-xs font-pixel uppercase text-secondary ">
               {playlist.length === 1
                 ? "1 JUEGO GUARDADO"
                 : playlist.length + " JUEGOS GUARDADOS"}
-            </h1>
+            </h2>
           </div>
           <button
             onClick={() => navigate("/juegos")}

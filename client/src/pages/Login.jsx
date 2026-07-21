@@ -3,6 +3,7 @@ import InputGroup from "../components/InputGroup";
 import { Link, useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 import { API_URL } from "../utils/authHeader";
+import SEO from "../components/SEO";
 
 export default function Login() {
   const [loginData, setLoginData] = useState({
@@ -67,6 +68,10 @@ export default function Login() {
         backgroundSize: "78px 78px",
       }}
     >
+      <SEO
+        title="Iniciar sesión"
+        description="Iniciá sesión en PlayRank para rankear tus juegos, armar tu Top 5 y guardar tu playlist."
+      />
       <span
         className="absolute w-screen min-h-screen z-10"
         style={{
@@ -74,12 +79,12 @@ export default function Login() {
             "radial-gradient(ellipse at center,rgba(255, 215, 0, 0.07) 0%,transparent 65%)",
         }}
       />
-      <h1 href="/" className="text-xl font-pixel text-primary z-20">
+      <Link to="/" className="text-xl font-pixel text-primary z-20">
         PlayRank
-      </h1>
-      <h2 className="font-pixel text-[#00ffff] text-md z-20">
+      </Link>
+      <h1 className="font-pixel text-[#00ffff] text-md z-20">
         {">> " + "INICIAR SESION" + " <<"}
-      </h2>
+      </h1>
       <form
         className="bg-[#0a0a14] w-[90vw] max-w-lg p-6 sm:p-10 bg z-20 border border-[#ffd7003b]"
         style={{ boxShadow: "4px 4px 0 #aa88004b" }}

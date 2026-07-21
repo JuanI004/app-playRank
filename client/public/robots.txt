@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /login
+Disallow: /signup
+Disallow: /playlist
+Disallow: /top-5
+
+Sitemap: https://app-play-rank.vercel.app/sitemap.xml

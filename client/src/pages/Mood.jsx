@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import GameCard from "../components/GameCard";
+import SEO from "../components/SEO";
 
 const MOODS = [
   {
@@ -109,6 +110,10 @@ export default function Mood() {
 
   return (
     <div className="w-screen min-h-screen bg-[#050508] p-4 pt-21.25 pb-5">
+      <SEO
+        title="Recomendación según tu mood"
+        description="Decinos cómo te sentís hoy y te recomendamos el juego perfecto para jugar en PlayRank."
+      />
       <main className="max-w-300 mx-auto flex flex-col justify-center items-center gap-4">
         <h1 className="font-pixel text-primary text-center text-xl mt-10">
           {">> " + "¿QUE MOOD TIENES HOY?" + " <<"}

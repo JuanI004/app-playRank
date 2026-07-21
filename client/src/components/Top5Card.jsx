@@ -50,7 +50,7 @@ export default function Top5Card({
       onClick={!juego ? onClick : undefined}
     >
       <div className="flex p-4 py-6 justify-center items-center gap-4">
-        <h1 className={`text-[2.5rem] font-pixel ${rating}`}>#{index + 1}</h1>
+        <p className={`text-[2.5rem] font-pixel ${rating}`}>#{index + 1}</p>
 
         {juego?.background_image ? (
           <div className="h-25 w-20 overflow-hidden shrink-0 cursor-pointer">
@@ -58,6 +58,7 @@ export default function Top5Card({
               onClick={() => navigate(`/juegos/${juego.id}`)}
               src={juego?.background_image}
               alt={juego?.name}
+              loading="lazy"
               className="w-full h-full object-cover object-center group-hover:scale-110 transition-all duration-500"
             />
           </div>

@@ -11,7 +11,7 @@ export default function GameCard({ juego }) {
   return (
     <div key={juego.id} onClick={() => navigate(`/juegos/${juego.id}`)} className='relative bg-[#050508] border border-[#ffd7004b]  hover:scale-102 hover:border-primary cursor-pointer transition-transform duration-200'>
         <div className="relative w-full">
-             <img src={juego.background_image} alt={juego.name} className='w-full h-48 object-cover' />
+             <img src={juego.background_image} alt={juego.name} loading="lazy" className='w-full h-48 object-cover' />
              <div className='absolute bottom-0 bg-linear-to-t from-[#050508] to-transparent w-full h-[50%]'/>
         </div>
 
