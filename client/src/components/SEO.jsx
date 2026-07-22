@@ -9,6 +9,7 @@ export default function SEO({
   image,
   type = "website",
   jsonLd,
+  noIndex = false,
 }) {
   const fullTitle = title ? `${title} | ${SITE_NAME}` : SITE_NAME;
   const url =
@@ -24,6 +25,7 @@ export default function SEO({
       <title>{fullTitle}</title>
       {description && <meta name="description" content={description} />}
       {url && <link rel="canonical" href={url} />}
+      {noIndex && <meta name="robots" content="noindex, follow" />}
 
       <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:type" content={type} />

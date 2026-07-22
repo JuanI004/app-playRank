@@ -16,6 +16,7 @@ import Top5 from "./pages/Top5.jsx";
 import Mood from "./pages/Mood.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/Signup.jsx";
+import NotFound from "./pages/NotFound.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />,
+  },
+  {
+    path: "*",
+    element: <NotFound />,
   },
 ]);
 
